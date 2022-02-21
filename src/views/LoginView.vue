@@ -2,8 +2,7 @@
 div(class="container-fluid")
     div(class="row")
         div(class="col-sm-12 col-md-8 col-lg-4  vh-100 justify-content-center align-items-center d-flex mx-auto")
-            div(class="w-100 bg-dark rounded-3 px-4 py-4 shadow")
-                Login-Dialog
+            Login-Dialog
 </template>
 
 <script lang="ts">

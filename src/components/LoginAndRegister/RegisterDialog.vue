@@ -1,6 +1,6 @@
 <template lang="pug">
-div(class="w-100 bg-dark rounded-3 px-4 py-4 shadow")
-                h1(class="mb-5 text-white") Register
+div(class="w-100 bg-dark rounded-3 p-4 shadow")
+                h1(class="mb-3 text-white") Register
                 form
                     div(class="form-group")
                         label(for="username-form" class="text-white opacity-75") E-mail
