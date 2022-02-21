@@ -1,26 +1,28 @@
 {
-  "name": "vue-chat-2",
-  "version": "0.0.0",
-  "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview --port 5050",
-    "typecheck": "vue-tsc --noEmit"
-  },
-  "dependencies": {
-    "bootstrap": "^5.1.3",
-    "firebase": "^9.6.7",
-    "pinia": "^2.0.11",
-    "popper.js": "^1.16.1",
-    "vue": "^3.2.29",
-    "vue-router": "^4.0.12"
-  },
-  "devDependencies": {
-    "@types/node": "^16.11.22",
-    "@vitejs/plugin-vue": "^2.1.0",
-    "@vue/tsconfig": "^0.1.3",
-    "typescript": "~4.5.5",
-    "vite": "^2.7.13",
-    "vue-tsc": "^0.31.1"
-  }
+    "name": "vue-chat-2",
+    "version": "0.0.0",
+    "scripts": {
+        "dev": "vite",
+        "build": "vue-tsc --noEmit && vite build",
+        "preview": "vite preview --port 5050",
+        "typecheck": "vue-tsc --noEmit",
+        "formatEverything": "prettier --write ."
+    },
+    "dependencies": {
+        "bootstrap": "^5.1.3",
+        "firebase": "^9.6.7",
+        "pinia": "^2.0.11",
+        "popper.js": "^1.16.1",
+        "vue": "^3.2.29",
+        "vue-router": "^4.0.12"
+    },
+    "devDependencies": {
+        "@types/node": "^16.11.22",
+        "@vitejs/plugin-vue": "^2.1.0",
+        "@vue/tsconfig": "^0.1.3",
+        "prettier": "^2.5.1",
+        "typescript": "~4.5.5",
+        "vite": "^2.7.13",
+        "vue-tsc": "^0.31.1"
+    }
 }
