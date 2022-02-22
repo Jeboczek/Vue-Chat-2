@@ -1,6 +1,8 @@
 <template lang="pug">
-h1 {{userStore.loggedIn}}
-h1 {{userStore.email}}
+div(class="container-fluid")
+    div(class="row")
+        div(class="col-sm-12 col-md-5 col-lg-2 border border-right vh-100")
+            ChatRoomNav
 
 </template>
 
@@ -8,11 +10,11 @@ h1 {{userStore.email}}
 import { useUserStore } from "@/stores/user";
 import { defineComponent } from "vue";
 
+import ChatRoomNav from "@/components/ChatComponents/Nav/ChatRoomNav.vue";
+
 export default defineComponent({
-    data() {
-        return {
-            userStore: useUserStore(),
-        };
+    components: {
+        ChatRoomNav,
     },
 });
 </script>
