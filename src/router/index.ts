@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
+import beforeEach from "./beforeEachFunction";
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
 import IndexView from "../views/IndexView.vue";
-import { useUserStore } from "@/stores/user";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,23 +34,6 @@ const router = createRouter({
     ],
 });
 
-router.beforeEach((to, from, next) => {
-    let userStore = useUserStore();
-    if (to.meta.requiresAuth) {
-        if (!userStore.loggedIn) {
-            next({
-                path: "/login",
-            });
-        }
-    }
-    if (to.meta.onlyIfNotLoggedIn) {
-        if (userStore.loggedIn) {
-            next({
-                path: "/",
-            });
-        }
-    }
-    next();
-});
+router.beforeEach(beforeEach);
 
 export default router;
