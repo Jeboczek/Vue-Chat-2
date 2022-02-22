@@ -3,6 +3,9 @@ import { createPinia } from "pinia";
 
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.min.js";
+
+import "sweetalert2/dist/sweetalert2.min.css";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
