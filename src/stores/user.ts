@@ -7,7 +7,6 @@ import {
 } from "firebase/auth";
 import type { User, Auth } from "firebase/auth";
 
-// TODO: Set here Firebase types.
 interface UserState {
     auth: Auth;
     user: User | null;
