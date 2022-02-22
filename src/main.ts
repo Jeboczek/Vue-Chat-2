@@ -28,10 +28,16 @@ const firebaseApp = initializeApp(firebaseConfig);
 
 import App from "./App.vue";
 import router from "./router";
+import { useUserStore } from "./stores/user";
 
-const app = createApp(App);
+(async () => {
+    const app = createApp(App);
 
-app.use(createPinia());
-app.use(router);
+    app.use(createPinia());
+    app.use(router);
 
-app.mount("#app");
+    const { bindUser } = useUserStore();
+    await bindUser();
+
+    app.mount("#app");
+})();

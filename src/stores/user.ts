@@ -59,13 +59,20 @@ export const useUserStore = defineStore({
                 }
             }
         },
+        async bindUser(): Promise<void> {
+            return new Promise((resolve, reject) => {
+                this.auth.onAuthStateChanged((user) => {
+                    this.user = user ? user : null;
+                    resolve();
+                });
+            });
+        },
     },
     getters: {
         loggedIn(): boolean {
             return this.user !== null;
         },
         email(): string {
-            console.log(this.user);
             return this.user?.email ? this.user.email : "";
         },
     },

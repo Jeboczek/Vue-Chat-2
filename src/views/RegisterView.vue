@@ -9,26 +9,21 @@ div(class="container-fluid")
 import { defineComponent } from "vue";
 import RegisterDialog from "@/components/LoginAndRegister/RegisterDialog.vue";
 import { useUserStore } from "@/stores/user";
-import type UserRegisterCredentials from "@/interfaces/userRegisterCredentials";
+import type UserCredentials from "@/interfaces/userCredentials";
 import Swal from "sweetalert2";
+import Toast from "@/lib/swal-toast/swal-toast";
 
 export default defineComponent({
     name: "LoginView",
     components: { RegisterDialog },
     methods: {
-        async createUser(userCredentials: UserRegisterCredentials) {
+        async createUser(userCredentials: UserCredentials) {
             let userStore = useUserStore();
             try {
                 await userStore.createUser(
                     userCredentials.email,
                     userCredentials.password
                 );
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: "bottom-end",
-                    timer: 3000,
-                    timerProgressBar: true,
-                });
                 Toast.fire({
                     icon: "success",
                     title: "Created new user.",

@@ -15,7 +15,7 @@ div(class="w-100 bg-dark rounded-3 p-4 shadow")
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import type UserRegisterCredentials from "@/interfaces/userRegisterCredentials";
+import type UserCredentials from "@/interfaces/userCredentials";
 import Swal from "sweetalert2";
 
 export default defineComponent({
@@ -41,7 +41,7 @@ export default defineComponent({
                     "error"
                 );
             } else {
-                const userCredentials: UserRegisterCredentials = {
+                const userCredentials: UserCredentials = {
                     email: this.email,
                     password: this.password,
                 };
