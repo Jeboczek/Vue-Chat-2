@@ -7,14 +7,14 @@ export default function beforeEach(
     next: NavigationGuardNext
 ) {
     let userStore = useUserStore();
-    if (to.meta.requiresAuth) {
+    if (from.meta.requiresAuth) {
         if (!userStore.loggedIn) {
             next({
                 path: "/login",
             });
         }
     }
-    if (to.meta.onlyIfNotLoggedIn) {
+    if (from.meta.onlyIfNotLoggedIn) {
         if (userStore.loggedIn) {
             next({
                 path: "/",
