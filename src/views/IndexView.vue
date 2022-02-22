@@ -7,7 +7,6 @@ div(class="container-fluid")
 </template>
 
 <script lang="ts">
-import { useUserStore } from "@/stores/user";
 import { defineComponent } from "vue";
 
 import ChatRoomNav from "@/components/ChatComponents/Nav/ChatRoomNav.vue";

@@ -28,6 +28,7 @@ const firebaseApp = initializeApp(firebaseConfig);
 import App from "./App.vue";
 import router from "./router";
 import { useUserStore } from "./stores/user";
+import { attachFirebaseToChatRoomStorage } from "@/stores/chatRoom";
 
 (async () => {
     const app = createApp(App);
@@ -35,6 +36,8 @@ import { useUserStore } from "./stores/user";
     app.use(createPinia());
     const { bindUser } = useUserStore();
     await bindUser();
+
+    attachFirebaseToChatRoomStorage();
 
     app.use(router);
 
