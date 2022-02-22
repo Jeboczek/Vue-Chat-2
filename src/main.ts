@@ -34,10 +34,10 @@ import { useUserStore } from "./stores/user";
     const app = createApp(App);
 
     app.use(createPinia());
-    app.use(router);
-
     const { bindUser } = useUserStore();
     await bindUser();
+
+    app.use(router);
 
     app.mount("#app");
 })();

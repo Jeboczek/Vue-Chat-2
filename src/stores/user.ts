@@ -61,10 +61,10 @@ export const useUserStore = defineStore({
         },
         async bindUser(): Promise<void> {
             return new Promise((resolve, reject) => {
-                this.auth.onAuthStateChanged((user) => {
+                this.auth.onAuthStateChanged(async (user) => {
                     this.user = user ? user : null;
                     resolve();
-                });
+                }, reject);
             });
         },
     },
