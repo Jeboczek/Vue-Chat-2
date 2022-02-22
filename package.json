@@ -9,6 +9,7 @@
         "formatEverything": "prettier --write ."
     },
     "dependencies": {
+        "animate.css": "^4.1.1",
         "bootstrap": "^5.1.3",
         "firebase": "^9.6.7",
         "pinia": "^2.0.11",
