@@ -5,6 +5,7 @@ const Toast = Swal.mixin({
     position: "bottom-end",
     timer: 3000,
     timerProgressBar: true,
+    showConfirmButton: false,
 });
 
 export default Toast;

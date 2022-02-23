@@ -24,10 +24,13 @@ export default defineComponent({
                     userCredentials.email,
                     userCredentials.password
                 );
+
                 Toast.fire({
                     icon: "success",
                     title: "Created new user.",
                 });
+
+                this.$router.push("/");
             } catch (e) {
                 console.log(e);
                 Swal.fire(

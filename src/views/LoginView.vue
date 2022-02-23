@@ -33,6 +33,8 @@ export default defineComponent({
                     icon: "success",
                     title: "Logged in.",
                 });
+
+                this.$router.push("/");
             } catch (e) {
                 console.log(e);
                 Swal.fire(
