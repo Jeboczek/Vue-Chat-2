@@ -6,6 +6,7 @@ button(class="btn btn-primary w-100 btn-lg rounded-pill my-3" @click="onClick")
 
 <script lang="ts">
 import swalBootstrapButtons from "@/lib/swal-mixins/swal-bootstrap-buttons";
+import { useChatRoomStore } from "@/stores/chatRoom";
 import { defineComponent } from "vue";
 export default defineComponent({
     methods: {
@@ -20,7 +21,7 @@ export default defineComponent({
                 </div>
                 <div class="form-group mt-3">
                     <label for="icon">Select icon</label>
-                    <select class="form-control" class="icon">
+                    <select class="form-control" id="icon">
                         <option selected value="fa-vuejs">Vue</option>
                         <option value="fa-php">Php</option>
                         <option value="fa-js">JavaScript</option>
@@ -38,6 +39,21 @@ export default defineComponent({
                     </select>
                 </div>
                 `,
+                preConfirm: async () => {
+                    // @ts-ignore
+                    const name = document.getElementById("room-name").value;
+                    // @ts-ignore
+                    const icon = "fab " + document.getElementById("icon").value;
+                    // @ts-ignore
+                    const color = document.getElementById("color").value;
+                    const roomStorage = useChatRoomStore();
+                    await roomStorage.addRoom({
+                        roomName: name,
+                        icon: icon,
+                        color: color,
+                        lastMessage: "",
+                    });
+                },
             });
         },
     },

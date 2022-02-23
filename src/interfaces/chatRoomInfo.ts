@@ -1,5 +1,5 @@
 export default interface ChatRoomInfo {
-    key: string;
+    key?: string;
     icon: string;
     color: string;
     roomName: string;

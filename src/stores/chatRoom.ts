@@ -6,6 +6,7 @@ import {
     onChildAdded,
     onChildChanged,
     onChildRemoved,
+    push,
 } from "firebase/database";
 
 export const useChatRoomStore = defineStore({
@@ -16,6 +17,18 @@ export const useChatRoomStore = defineStore({
     getters: {
         getRooms(): ChatRoomInfo[] {
             return this.rooms;
+        },
+    },
+    actions: {
+        async addRoom(cr: ChatRoomInfo) {
+            let db = getDatabase();
+            let query = await ref(db, "room/");
+            const { roomName, color, icon } = cr;
+            push(query, {
+                name: roomName,
+                color: color,
+                icon: icon,
+            });
         },
     },
 });
