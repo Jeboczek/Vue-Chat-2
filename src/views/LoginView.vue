@@ -11,7 +11,7 @@ import LoginDialog from "@/components/LoginAndRegister/LoginDialog.vue";
 import type UserCredentials from "@/interfaces/userCredentials";
 import { useUserStore } from "@/stores/user";
 import Swal from "sweetalert2";
-import Toast from "@/lib/swal-toast/swal-toast";
+import Toast from "@/lib/swal-mixins/swal-toast";
 
 export default defineComponent({
     name: "LoginView",

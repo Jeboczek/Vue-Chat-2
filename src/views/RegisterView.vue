@@ -11,7 +11,7 @@ import RegisterDialog from "@/components/LoginAndRegister/RegisterDialog.vue";
 import { useUserStore } from "@/stores/user";
 import type UserCredentials from "@/interfaces/userCredentials";
 import Swal from "sweetalert2";
-import Toast from "@/lib/swal-toast/swal-toast";
+import Toast from "@/lib/swal-mixins/swal-toast";
 
 export default defineComponent({
     name: "LoginView",
