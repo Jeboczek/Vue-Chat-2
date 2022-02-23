@@ -27,7 +27,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-$circle-size: 3.7rem;
+$circle-size: 3.5rem;
 div.chat-icon {
     height: $circle-size;
     width: $circle-size;
