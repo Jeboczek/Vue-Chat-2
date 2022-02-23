@@ -1,5 +1,5 @@
 <template lang="pug">
-div(class="chat-room d-flex flex-row align-items-center gap-3 p-2 rounded-pill animate__animated animate__slideInLeft")
+div(:class="['chat-room', 'd-flex', 'flex-row', 'align-items-center', 'gap-3', 'p-2', 'rounded-pill', 'animate__animated', 'animate__slideInLeft', active ? 'active' : '']")
     div(class="rounded rounded-circle chat-icon d-flex align-items-center justify-content-center text-white fs-2" :style='{backgroundColor: chatRoomInfo.color}')
         i(:class="chatRoomInfo.icon")
     div(class="d-flex flex-column")
@@ -16,6 +16,11 @@ export default defineComponent({
         chatRoomInfo: {
             type: Object as () => ChatRoomInfo,
             required: true,
+        },
+        active: {
+            type: Boolean,
+            required: false,
+            default: false,
         },
     },
 });
@@ -34,6 +39,10 @@ div.chat-room {
         background-color: transparentize($color: gray, $amount: 0.9);
         cursor: pointer;
         user-select: none;
+    }
+
+    &.active {
+        background-color: transparentize($color: #0d6efd, $amount: 0.3);
     }
 }
 </style>
