@@ -1,7 +1,7 @@
 <template lang="pug">
-button(class="btn btn-primary w-100 btn-lg rounded-pill my-3" @click="onClick")
-    span(class="me-2") Create new
-    i(class="fa-solid fa-plus")
+button.btn.btn-primary.w-100.btn-lg.rounded-pill.my-3(@click="onClick")
+    span.me-2 Create new
+    i.fa-solid.fa-plus
 </template>
 
 <script lang="ts">

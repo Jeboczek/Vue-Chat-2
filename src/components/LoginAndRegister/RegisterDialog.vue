@@ -1,16 +1,28 @@
 <template lang="pug">
-div(class="w-100 bg-dark rounded-3 p-4 shadow")
-                h1(class="mb-3 text-white") Register
-                form(@submit.prevent="createUser")
-                    div(class="form-group")
-                        label(for="email-form" class="text-white opacity-75") E-mail
-                        input(class="form-control" type="email" id="email-form" v-model="email" required)
-                        label(for="password-form" class="text-white opacity-75 mt-3") Password
-                        input(class="form-control" type="password" id="password-form" v-model="password" required)
-                        label(for="repeatedPassword-form" class="text-white opacity-75 mt-3") Repeat password
-                        input(class="form-control" type="password" id="repeatedPassword-form" v-model="repeatedPassword" required)
-                        input(type="submit" class="btn btn-primary mt-3 mb-2" value="Register")
-                router-link(to="/login" class="text-decoration-none") Login to exist account
+.w-100.bg-dark.rounded-3.p-4.shadow
+    h1.mb-3.text-white Register
+    form(@submit.prevent="createUser")
+        .form-group
+            label.text-white.opacity-75(for="email-form") E-mail
+            input#email-form.form-control(
+                type="email",
+                v-model="email",
+                required
+            )
+            label.text-white.opacity-75.mt-3(for="password-form") Password
+            input#password-form.form-control(
+                type="password",
+                v-model="password",
+                required
+            )
+            label.text-white.opacity-75.mt-3(for="repeatedPassword-form") Repeat password
+            input#repeatedPassword-form.form-control(
+                type="password",
+                v-model="repeatedPassword",
+                required
+            )
+            input.btn.btn-primary.mt-3.mb-2(type="submit", value="Register")
+    router-link.text-decoration-none(to="/login") Login to exist account
 </template>
 
 <script lang="ts">

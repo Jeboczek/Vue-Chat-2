@@ -1,10 +1,18 @@
 <template lang="pug">
-h2(class="text-center mt-3 mb-4") Vue chat
-input(type="text" v-model="searchText" class="w-100 border p-3 fs-5 rounded-pill text-muted" placeholder="Search...")
+h2.text-center.mt-3.mb-4 Vue chat
+input.w-100.border.px-4.py-2.fs-5.rounded-pill.text-muted(
+    type="text",
+    v-model="searchText",
+    placeholder="Search..."
+)
 CreateChatRoomButton
-hr(class="mx-4 mb-3")
-div(class="chat-rooms-list")
-    ChatRoom(v-for="chatRoomInfo in getRooms" :chatRoomInfo="chatRoomInfo" :id="chatRoomInfo.key")
+hr.mx-4.mb-3
+.chat-rooms-list
+    ChatRoom(
+        v-for="chatRoomInfo in getRooms",
+        :chatRoomInfo="chatRoomInfo",
+        :id="chatRoomInfo.key"
+    )
 LogoutButton
 </template>
 

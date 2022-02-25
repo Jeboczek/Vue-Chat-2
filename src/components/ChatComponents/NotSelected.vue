@@ -1,7 +1,7 @@
 <template lang="pug">
-i(class="fa-solid fa-hand-pointer h1")
+i.fa-solid.fa-hand-pointer.h1
 h5 Chat room not selected
-p(class="text-muted") select any to continue
+p.text-muted select any to continue
 </template>
 
 <script lang="ts">

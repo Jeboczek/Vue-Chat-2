@@ -1,5 +1,5 @@
 <template lang="pug">
-p(class="color-primary text-decoration-underline mt-auto text-center" @click="logOut") Logout
+p.color-primary.text-decoration-underline.mt-auto.text-center(@click="logOut") Logout
 </template>
 
 <script lang="ts">

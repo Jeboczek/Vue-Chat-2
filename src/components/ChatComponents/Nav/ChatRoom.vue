@@ -1,10 +1,14 @@
 <template lang="pug">
-div(:class="['chat-room', 'd-flex', 'flex-row', 'align-items-center', 'gap-3', 'p-2', 'rounded-pill', 'animate__animated', 'animate__slideInLeft', active ? 'active' : '']")
-    div(class="rounded rounded-circle chat-icon d-flex align-items-center justify-content-center text-white fs-2" :style='{backgroundColor: chatRoomInfo.color}')
+div(
+    :class="['chat-room', 'd-flex', 'flex-row', 'align-items-center', 'gap-3', 'p-2', 'rounded-pill', 'animate__animated', 'animate__slideInLeft', active ? 'active' : '']"
+)
+    .rounded.rounded-circle.chat-icon.d-flex.align-items-center.justify-content-center.text-white.fs-2(
+        :style="{ backgroundColor: chatRoomInfo.color }"
+    )
         i(:class="chatRoomInfo.icon")
-    div(class="d-flex flex-column")
-        p(class="h4 mb-1") {{chatRoomInfo.roomName}}
-        p(class="text-muted mb-0") {{chatRoomInfo.lastMessage}} 
+    .d-flex.flex-column
+        p.h5.mb-1 {{ chatRoomInfo.roomName }}
+        p.text-muted.mb-0 {{ chatRoomInfo.lastMessage }}
 </template>
 
 <script lang="ts">
@@ -27,10 +31,14 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-$circle-size: 3.5rem;
+$circle-size: 3rem;
 div.chat-icon {
     height: $circle-size;
     width: $circle-size;
+
+    i {
+        font-size: calc($circle-size / 1.5);
+    }
 }
 
 div.chat-room {
