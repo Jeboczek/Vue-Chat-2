@@ -30,6 +30,11 @@ export const useChatRoomStore = defineStore({
                 icon: icon,
             });
         },
+        getChatRoomById(id: string): ChatRoomInfo {
+            return this.rooms.filter((e: ChatRoomInfo) => {
+                return e.key === id;
+            })[0];
+        },
     },
 });
 

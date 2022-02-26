@@ -1,14 +1,15 @@
 <template lang="pug">
-div(
-    :class="['chat-room', 'd-flex', 'flex-row', 'align-items-center', 'gap-3', 'p-2', 'rounded-pill', 'animate__animated', 'animate__slideInLeft', active ? 'active' : '']"
-)
-    .rounded.rounded-circle.chat-icon.d-flex.align-items-center.justify-content-center.text-white.fs-2(
-        :style="{ backgroundColor: chatRoomInfo.color }"
+router-link.text-decoration-none.text-black(:to="`/chat/${chatRoomInfo.key}`")
+    div(
+        :class="['chat-room', 'd-flex', 'flex-row', 'align-items-center', 'gap-3', 'p-2', 'rounded-pill', 'animate__animated', 'animate__slideInLeft', active ? 'active' : '']"
     )
-        i(:class="chatRoomInfo.icon")
-    .d-flex.flex-column
-        p.h5.mb-1 {{ chatRoomInfo.roomName }}
-        p.text-muted.mb-0 {{ chatRoomInfo.lastMessage }}
+        .rounded.rounded-circle.chat-icon.d-flex.align-items-center.justify-content-center.text-white.fs-2(
+            :style="{ backgroundColor: chatRoomInfo.color }"
+        )
+            i(:class="chatRoomInfo.icon")
+        .d-flex.flex-column
+            p.h5.mb-1 {{ chatRoomInfo.roomName }}
+            p.text-muted.mb-0 {{ chatRoomInfo.lastMessage }}
 </template>
 
 <script lang="ts">

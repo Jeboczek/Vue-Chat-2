@@ -3,6 +3,7 @@ import beforeEach from "./beforeEachFunction";
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
 import IndexView from "../views/IndexView.vue";
+import RoomSelectedView from "../views/RoomSelectedView.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,6 +30,15 @@ const router = createRouter({
             component: RegisterView,
             meta: {
                 onlyIfNotLoggedIn: true,
+            },
+        },
+        {
+            path: "/chat/:id",
+            name: "Chat",
+            component: RoomSelectedView,
+            props: true,
+            meta: {
+                requiresAuth: true,
             },
         },
     ],
