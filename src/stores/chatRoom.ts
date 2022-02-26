@@ -10,7 +10,7 @@ import {
 } from "firebase/database";
 
 export const useChatRoomStore = defineStore({
-    id: "chatRoom",
+    id: "chatRooms",
     state: (): { rooms: ChatRoomInfo[] } => {
         return { rooms: [] };
     },
