@@ -1,0 +1,6 @@
+<template lang="pug">
+.h-100.w-100.d-flex.align-items-center.justify-content-center.flex-column
+    .spinner-border.text-primary.mb-2(role="status")
+        span.sr-only Loading...
+    p Loading...
+</template>
