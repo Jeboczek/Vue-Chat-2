@@ -5,23 +5,21 @@ router-link.text-decoration-none.text-black(:to="`/chat/${chatRoomInfo.key}`")
         :id="`chat-room-${chatRoomInfo.key}`",
         @animationend="animationEnd"
     )
-        .rounded.rounded-circle.chat-icon.d-flex.align-items-center.justify-content-center.text-white.fs-2(
-            :style="{ backgroundColor: chatRoomInfo.color }"
-        )
-            i(:class="chatRoomInfo.icon")
-        .d-flex.flex-column
-            p.h5.mb-1 {{ chatRoomInfo.roomName }}
-            p.text-muted.mb-0 {{ chatRoomInfo.lastMessage }}
+        ChatIcon(:chatRoomInfo="chatRoomInfo", :size="3")
+        p.h5.mb-1 {{ chatRoomInfo.roomName }}
+        p.text-muted.mb-0 {{ chatRoomInfo.lastMessage }}
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import ChatIcon from "@/components/ChatIcon.vue";
 import { useChatStore } from "@/stores/chat";
 import { useChatRoomStore } from "@/stores/chatRoom";
 import type ChatRoomInfo from "@/interfaces/chatRoomInfo";
 import type { Store } from "pinia";
 
 export default defineComponent({
+    components: { ChatIcon },
     props: {
         chatRoomInfo: {
             type: Object as () => ChatRoomInfo,
@@ -69,16 +67,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-$circle-size: 3rem;
-div.chat-icon {
-    height: $circle-size;
-    width: $circle-size;
-
-    i {
-        font-size: calc($circle-size / 1.5);
-    }
-}
-
 div.chat-room {
     transition: 0.25s background-color;
     &:hover {

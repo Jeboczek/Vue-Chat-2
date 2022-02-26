@@ -3,13 +3,15 @@
     .row
         .col-12.col-md-5.col-lg-3.border.border-right.vh-100.d-flex.flex-column
             ChatRoomNav
-        .col-12.col-md-7.col-lg-9.d-flex.vh-100.flex-column.align-items-center.justify-content-center
+        .col-12.col-md-7.col-lg-9.d-flex.vh-100.flex-column.align-items-center.px-0
+            ChatHeading
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 
 import ChatRoomNav from "@/components/ChatComponents/Nav/ChatRoomNav.vue";
+import ChatHeading from "@/components/ChatComponents/Chat/ChatHeading.vue";
 import type ChatRoomInfo from "@/interfaces/chatRoomInfo";
 import { useChatRoomStore } from "@/stores/chatRoom";
 import type { Store } from "pinia";
@@ -18,6 +20,7 @@ import { useChatStore } from "@/stores/chat";
 export default defineComponent({
     components: {
         ChatRoomNav,
+        ChatHeading,
     },
     props: {
         id: {
