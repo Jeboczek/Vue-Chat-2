@@ -11,8 +11,8 @@ import {
 
 export const useChatRoomStore = defineStore({
     id: "chatRooms",
-    state: (): { rooms: ChatRoomInfo[] } => {
-        return { rooms: [] };
+    state: (): { rooms: ChatRoomInfo[]; animated: boolean } => {
+        return { rooms: [], animated: false };
     },
     getters: {
         getRooms(): ChatRoomInfo[] {

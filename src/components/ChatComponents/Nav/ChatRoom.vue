@@ -1,7 +1,9 @@
 <template lang="pug">
 router-link.text-decoration-none.text-black(:to="`/chat/${chatRoomInfo.key}`")
     div(
-        :class="['chat-room', 'd-flex', 'flex-row', 'align-items-center', 'gap-3', 'p-2', 'rounded-pill', 'animate__animated', 'animate__slideInLeft', isThisChatRoomActive ? 'active' : '']"
+        :class="['chat-room', 'd-flex', 'flex-row', 'align-items-center', 'gap-3', 'p-2', 'rounded-pill', isThisChatRoomActive ? 'active' : '']",
+        :id="`chat-room-${chatRoomInfo.key}`",
+        @animationend="animationEnd"
     )
         .rounded.rounded-circle.chat-icon.d-flex.align-items-center.justify-content-center.text-white.fs-2(
             :style="{ backgroundColor: chatRoomInfo.color }"
@@ -15,7 +17,9 @@ router-link.text-decoration-none.text-black(:to="`/chat/${chatRoomInfo.key}`")
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useChatStore } from "@/stores/chat";
+import { useChatRoomStore } from "@/stores/chatRoom";
 import type ChatRoomInfo from "@/interfaces/chatRoomInfo";
+import type { Store } from "pinia";
 
 export default defineComponent({
     props: {
@@ -24,11 +28,42 @@ export default defineComponent({
             required: true,
         },
     },
+    data(): { animated: boolean; chatRoomStore: Store; chatStore: Store } {
+        return {
+            animated: false,
+            chatRoomStore: useChatRoomStore(),
+            chatStore: useChatStore(),
+        };
+    },
     computed: {
         isThisChatRoomActive() {
-            let chatStore = useChatStore();
-            return chatStore.selectedRoom?.key === this.chatRoomInfo.key;
+            return this.chatStore.selectedRoom?.key === this.chatRoomInfo.key;
         },
+    },
+    methods: {
+        animationEnd() {
+            let chatElement = document.getElementById(
+                `chat-room-${this.chatRoomInfo.key}`
+            );
+            chatElement?.classList.remove(
+                "animate__animated",
+                "animate__slideInLeft",
+                "animate__faster"
+            );
+            this.chatRoomStore.animated = true;
+        },
+    },
+    mounted() {
+        if (!this.chatRoomStore.animated) {
+            let chatElement = document.getElementById(
+                `chat-room-${this.chatRoomInfo.key}`
+            );
+            chatElement?.classList.add(
+                "animate__animated",
+                "animate__slideInLeft",
+                "animate__faster"
+            );
+        }
     },
 });
 </script>
@@ -53,7 +88,8 @@ div.chat-room {
     }
 
     &.active {
-        background-color: transparentize($color: #0d6efd, $amount: 0.3);
+        background-color: #0d6efd;
+        color: white;
     }
 }
 </style>
