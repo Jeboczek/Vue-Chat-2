@@ -23,7 +23,10 @@ const router = createRouter({
             component: IndexView,
             meta: {
                 pageOptions: {
-                    guardValidators: [new LoginValidator()],
+                    guardValidators: [
+                        new LoginValidator(),
+                        new ActiveChatValidator(),
+                    ],
                 },
             },
         },
@@ -49,7 +52,7 @@ const router = createRouter({
         },
         {
             path: "/chat/:id",
-            name: "Chat",
+            name: "chat",
             component: RoomSelectedView,
             props: true,
             meta: {

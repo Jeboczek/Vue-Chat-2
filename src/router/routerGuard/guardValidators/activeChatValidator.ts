@@ -8,13 +8,18 @@ export default class ActiveChatValidator extends GuardValidator {
         let chatRoomsStore = useChatRoomStore();
         let chatStore = useChatStore();
 
-        let chatId = to.params.id.toString();
-        let chatRoom = chatRoomsStore.getChatRoomById(chatId);
+        if (to.name == "chat") {
+            let chatId = to.params.id.toString();
+            let chatRoom = chatRoomsStore.getChatRoomById(chatId);
 
-        if (chatRoom) {
-            chatStore.setSelectedRoom(chatRoom);
+            if (chatRoom) {
+                chatStore.setSelectedRoom(chatRoom);
+                return true;
+            }
+            return false;
+        } else {
+            chatStore.selectedRoom = undefined;
             return true;
         }
-        return false;
     }
 }

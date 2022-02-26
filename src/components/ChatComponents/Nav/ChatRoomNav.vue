@@ -1,5 +1,5 @@
 <template lang="pug">
-h2.text-center.mt-3.mb-4 Vue chat
+NavLogo
 input.w-100.border.px-4.py-2.fs-5.rounded-pill.text-muted(
     type="text",
     v-model="searchText",
@@ -22,11 +22,12 @@ import { defineComponent } from "vue";
 import ChatRoom from "./ChatRoom.vue";
 import CreateChatRoomButton from "./CreateChatRoomButton.vue";
 import LogoutButton from "./LogoutButton.vue";
+import NavLogo from "./NavLogo.vue";
 import { useChatRoomStore } from "@/stores/chatRoom";
 import type ChatRoomInfo from "@/interfaces/chatRoomInfo";
 
 export default defineComponent({
-    components: { ChatRoom, CreateChatRoomButton, LogoutButton },
+    components: { ChatRoom, CreateChatRoomButton, LogoutButton, NavLogo },
     data() {
         return {
             searchText: "",
