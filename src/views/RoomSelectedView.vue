@@ -31,13 +31,16 @@ export default defineComponent({
     },
     data(): {
         chatStore: Store;
-        loading: boolean;
     } {
         let chatStore = useChatStore();
         return {
             chatStore: chatStore,
-            loading: true,
         };
+    },
+    computed: {
+        loading() {
+            return this.chatStore.messages === undefined;
+        },
     },
 });
 </script>

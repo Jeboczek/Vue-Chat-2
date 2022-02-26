@@ -1,5 +1,5 @@
 export default interface Message {
-    id: string;
+    key: string;
     username: string;
     content: string;
     date: Date;

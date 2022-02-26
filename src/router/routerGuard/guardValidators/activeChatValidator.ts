@@ -2,6 +2,7 @@ import { useChatStore } from "@/stores/chat";
 import { useChatRoomStore } from "@/stores/chatRoom";
 import GuardValidator from "../guardValidator";
 import type { RouteLocationNormalized } from "vue-router";
+import { attachFirebaseToChatStorage } from "@/stores/chat";
 
 export default class ActiveChatValidator extends GuardValidator {
     validate(to: RouteLocationNormalized): boolean {
@@ -14,11 +15,14 @@ export default class ActiveChatValidator extends GuardValidator {
 
             if (chatRoom) {
                 chatStore.setSelectedRoom(chatRoom);
+                chatStore.messages = [];
+                attachFirebaseToChatStorage();
                 return true;
             }
             return false;
         } else {
             chatStore.selectedRoom = undefined;
+            chatStore.messages = undefined;
             return true;
         }
     }
