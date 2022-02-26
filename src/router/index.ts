@@ -1,9 +1,18 @@
 import { createRouter, createWebHistory } from "vue-router";
-import beforeEach from "./beforeEachFunction";
+
+// Pages
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
 import IndexView from "../views/IndexView.vue";
 import RoomSelectedView from "../views/RoomSelectedView.vue";
+
+// Validators
+import LoginValidator from "./routerGuard/guardValidators/loginValidator";
+import ActiveChatValidator from "./routerGuard/guardValidators/activeChatValidator";
+import NoLoginValidator from "./routerGuard/guardValidators/noLoginValidator";
+import RouterGuard from "./routerGuard/routerGuard";
+
+const routerGuard = new RouterGuard();
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,7 +22,9 @@ const router = createRouter({
             name: "index",
             component: IndexView,
             meta: {
-                requiresAuth: true,
+                pageOptions: {
+                    guardValidators: [new LoginValidator()],
+                },
             },
         },
         {
@@ -21,7 +32,9 @@ const router = createRouter({
             name: "login",
             component: LoginView,
             meta: {
-                onlyIfNotLoggedIn: true,
+                pageOptions: {
+                    guardValidators: [new NoLoginValidator()],
+                },
             },
         },
         {
@@ -29,7 +42,9 @@ const router = createRouter({
             name: "register",
             component: RegisterView,
             meta: {
-                onlyIfNotLoggedIn: true,
+                pageOptions: {
+                    guardValidators: [new NoLoginValidator()],
+                },
             },
         },
         {
@@ -38,12 +53,19 @@ const router = createRouter({
             component: RoomSelectedView,
             props: true,
             meta: {
-                requiresAuth: true,
+                pageOptions: {
+                    guardValidators: [
+                        new LoginValidator(),
+                        new ActiveChatValidator(),
+                    ],
+                },
             },
         },
     ],
 });
 
-router.beforeEach(beforeEach);
+router.beforeEach((to, from, next) => {
+    routerGuard.handleRouting(to, from, next);
+});
 
 export default router;
