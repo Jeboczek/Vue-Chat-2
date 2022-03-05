@@ -15,6 +15,7 @@
                         :key="message.key",
                         :message="message"
                     )
+            MessageSender.message-sender
 </template>
 
 <script lang="ts">
@@ -25,6 +26,7 @@ import isInResponsiveMode from "@/lib/isInResponsiveMode/isInResponsiveMode";
 import ChatRoomNav from "@/components/ChatComponents/Nav/ChatRoomNav.vue";
 import ChatHeading from "@/components/ChatComponents/Chat/ChatHeading.vue";
 import Message from "@/components/ChatComponents/Chat/Message.vue";
+import MessageSender from "@/components/ChatComponents/Chat/MessageSender.vue";
 import Spinner from "@/components/Spinner.vue";
 import type { Store } from "pinia";
 import { useChatStore } from "@/stores/chat";
@@ -35,6 +37,7 @@ export default defineComponent({
         ChatHeading,
         Spinner,
         Message,
+        MessageSender,
     },
     props: {
         id: {
