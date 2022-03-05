@@ -8,7 +8,10 @@
         ChatIcon(:chatRoomInfo="chatStore.selectedRoom", :size="2.5")
         h5.m-0.ms-3 {{ chatStore.selectedRoom.roomName }}
     .chat-heading__right-wrapper
-        button.btn.btn-danger(v-if="chatStore.isMyRoom", @click="deleteRoom")
+        button.btn.btn-danger.me-1(
+            v-if="chatStore.isMyRoom",
+            @click="deleteRoom"
+        )
             i.fa-solid.fa-trash-can.pe-2
             | Delete
 </template>
