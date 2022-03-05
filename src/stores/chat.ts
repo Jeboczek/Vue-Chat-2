@@ -7,7 +7,9 @@ import {
     onChildChanged,
     onChildRemoved,
     ref,
+    remove,
 } from "firebase/database";
+import { useUserStore } from "./user";
 
 export const useChatStore = defineStore({
     id: "chat",
@@ -21,6 +23,18 @@ export const useChatStore = defineStore({
     actions: {
         setSelectedRoom(selectedRoom: ChatRoomInfo) {
             this.selectedRoom = selectedRoom;
+        },
+        async deleteSelectedRoom() {
+            const db = getDatabase();
+            const selectedFBRoom = ref(db, `/room/${this.selectedRoom?.key}`);
+            await remove(selectedFBRoom);
+            this.selectedRoom = undefined;
+        },
+    },
+    getters: {
+        isMyRoom(): boolean {
+            let userStore = useUserStore();
+            return this.selectedRoom?.createdBy === userStore.user?.uid;
         },
     },
 });
