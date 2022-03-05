@@ -8,6 +8,7 @@ import {
     onChildRemoved,
     push,
 } from "firebase/database";
+import { useUserStore } from "./user";
 
 export const useChatRoomStore = defineStore({
     id: "chatRooms",
@@ -21,6 +22,7 @@ export const useChatRoomStore = defineStore({
     },
     actions: {
         async addRoom(cr: ChatRoomInfo) {
+            let userStore = useUserStore();
             let db = getDatabase();
             let query = await ref(db, "room/");
             const { roomName, color, icon } = cr;
@@ -28,6 +30,7 @@ export const useChatRoomStore = defineStore({
                 name: roomName,
                 color: color,
                 icon: icon,
+                createdBy: userStore.user?.uid,
             });
         },
         getChatRoomById(id: string): ChatRoomInfo {
@@ -46,13 +49,15 @@ export function attachFirebaseToChatRoomStorage() {
     const chatRoomStore = useChatRoomStore();
 
     onChildAdded(roomRef, (data) => {
-        const dataVal = data.val();
+        const key = data.key;
+        const { icon, name, color, lastMessage, createdBy } = data.val();
         const newRoomToAdd: ChatRoomInfo = {
-            key: data.key!,
-            icon: dataVal.icon,
-            roomName: dataVal.name,
-            color: dataVal.color,
-            lastMessage: dataVal.lastMessage ? dataVal.lastMessage : "",
+            key: key!,
+            icon: icon,
+            roomName: name,
+            color: color,
+            lastMessage: lastMessage ? lastMessage : "",
+            createdBy: createdBy,
         };
         chatRoomStore.rooms.push(newRoomToAdd);
     });
@@ -67,10 +72,11 @@ export function attachFirebaseToChatRoomStorage() {
         const changedRoom = chatRoomStore.rooms.filter((e: ChatRoomInfo) => {
             return e.key === data.key;
         })[0];
-        const { icon, name, color, lastMessage } = data.val();
+        const { icon, name, color, lastMessage, createdBy } = data.val();
         changedRoom.icon = icon;
         changedRoom.roomName = name;
         changedRoom.color = color;
         changedRoom.lastMessage = lastMessage;
+        changedRoom.createdBy = createdBy;
     });
 }
