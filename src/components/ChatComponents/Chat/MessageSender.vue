@@ -4,7 +4,7 @@
         input.form-control(
             type="text",
             v-model="messageContent",
-            placeholder="Write your message here..."
+            placeholder="Type your message here..."
         )
         button.btn.btn-primary
             | Send
@@ -28,8 +28,10 @@ export default defineComponent({
     },
     methods: {
         onSend() {
-            this.chatStore.sendMessage(this.messageContent);
-            this.messageContent = "";
+            if (this.messageContent) {
+                this.chatStore.sendMessage(this.messageContent);
+                this.messageContent = "";
+            }
         },
     },
 });
