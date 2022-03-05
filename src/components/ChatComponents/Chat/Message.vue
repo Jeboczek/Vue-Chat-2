@@ -5,7 +5,7 @@ li.d-flex.align-items-center(:class="isMyMessage ? '--my-message' : ''")
         v-if="!isMyMessage"
     )
         span.message__avatar__letter {{ message.username[0] }}
-    .text-white.px-4.py-2.rounded-pill.mx-2.my-2.message__content.d-flex.flex-column(
+    .text-white.px-4.py-2.rounded-pill.my-2.message__content.d-flex.flex-column(
         :style="{ backgroundColor: chatColor }"
     )
         | {{ message.content }}
@@ -41,7 +41,7 @@ export default defineComponent({
         },
         isMyMessage() {
             const userStore = useUserStore();
-            return this.message.username === userStore.user?.displayName;
+            return this.message.username === userStore.username;
         },
     },
 });
@@ -51,12 +51,22 @@ export default defineComponent({
 li {
     list-style-type: none;
 
-    &--my-message {
-        margin-left: auto;
+    &.--my-message {
+        .message {
+            &__content {
+                margin-left: auto !important;
+                background-color: #0d6efd !important;
+            }
+            &__username {
+                display: none;
+            }
+        }
     }
 
     .message {
         &__content {
+            margin-right: 0.5rem;
+            margin-left: 0.5rem;
             width: fit-content;
         }
         &__username {

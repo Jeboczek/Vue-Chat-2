@@ -8,6 +8,7 @@ import {
     onChildRemoved,
     ref,
     remove,
+    push,
 } from "firebase/database";
 import { useUserStore } from "./user";
 
@@ -29,6 +30,17 @@ export const useChatStore = defineStore({
             const selectedFBRoom = ref(db, `/room/${this.selectedRoom?.key}`);
             await remove(selectedFBRoom);
             this.selectedRoom = undefined;
+        },
+        sendMessage(message: string) {
+            const userStore = useUserStore();
+            const db = getDatabase();
+            const { key: roomKey } = this.selectedRoom!;
+            const messagesRef = ref(db, `/room/${roomKey}/message/`);
+            push(messagesRef, {
+                username: userStore.username,
+                content: message,
+                date: new Date(),
+            });
         },
     },
     getters: {

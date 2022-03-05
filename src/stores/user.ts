@@ -74,5 +74,12 @@ export const useUserStore = defineStore({
         email(): string {
             return this.user?.email ? this.user.email : "";
         },
+        username(): string {
+            const displayName = this.user?.displayName;
+            if (!displayName) {
+                return this.user?.email?.split("@")[0]!;
+            }
+            return displayName;
+        },
     },
 });
