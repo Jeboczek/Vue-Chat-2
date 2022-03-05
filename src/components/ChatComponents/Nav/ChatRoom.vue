@@ -6,8 +6,9 @@ router-link.text-decoration-none.text-black(:to="`/chat/${chatRoomInfo.key}`")
         @animationend="animationEnd"
     )
         ChatIcon(:chatRoomInfo="chatRoomInfo", :size="3")
-        p.h5.mb-1 {{ chatRoomInfo.roomName }}
-        p.text-muted.mb-0 {{ chatRoomInfo.lastMessage }}
+        .d-flex.flex-column
+            p.h5.mb-0 {{ chatRoomInfo.roomName }}
+            span.text-muted.mb-0.last-message {{ chatRoomInfo.lastMessage }}
 </template>
 
 <script lang="ts">
@@ -78,6 +79,13 @@ div.chat-room {
     &.active {
         background-color: #0d6efd;
         color: white;
+        span.last-message {
+            color: transparentize($color: #fff, $amount: 0.4) !important;
+        }
+    }
+
+    span.last-message {
+        font-size: 0.8rem;
     }
 }
 </style>

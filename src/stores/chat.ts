@@ -9,6 +9,7 @@ import {
     ref,
     remove,
     push,
+    update,
 } from "firebase/database";
 import { useUserStore } from "./user";
 
@@ -31,6 +32,12 @@ export const useChatStore = defineStore({
             await remove(selectedFBRoom);
             this.selectedRoom = undefined;
         },
+        updateLastMessage(lastMessage: string) {
+            const { key: roomKey } = this.selectedRoom!;
+            const db = getDatabase();
+            const roomRef = ref(db, `/room/${roomKey}`);
+            update(roomRef, { lastMessage });
+        },
         sendMessage(message: string) {
             const userStore = useUserStore();
             const db = getDatabase();
@@ -41,6 +48,8 @@ export const useChatStore = defineStore({
                 content: message,
                 date: new Date(),
             });
+
+            this.updateLastMessage(message);
         },
     },
     getters: {
