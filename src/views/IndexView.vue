@@ -7,7 +7,6 @@
             v-if="showContent"
         )
             NotSelected(v-if="showContent")
-        | {{ showContent }}
 </template>
 
 <script lang="ts">
