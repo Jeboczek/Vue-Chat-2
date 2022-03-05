@@ -60,6 +60,14 @@ export const useChatStore = defineStore({
                 this.messages?.push(message);
             }
         },
+        onFirebaseRoomDeletion(roomKey: string): boolean {
+            const { key } = this.selectedRoom!;
+            if (roomKey === key) {
+                this.selectedRoom = undefined;
+                return true;
+            }
+            return false;
+        },
     },
     getters: {
         isMyRoom(): boolean {
@@ -74,6 +82,7 @@ export function attachFirebaseToChatStorage() {
     const chatStore = useChatStore();
     const db = getDatabase();
     const messagesRef = ref(db, `room/${chatStore.selectedRoom?.key}/message`);
+    const roomRef = ref(db, `room/`);
 
     onChildAdded(messagesRef, (data) => {
         const key = data.key!;
@@ -91,6 +100,11 @@ export function attachFirebaseToChatStorage() {
         chatStore.messages = chatStore.messages!.filter((e: Message) => {
             return e.key !== key;
         });
+    });
+
+    onChildRemoved(roomRef, (data) => {
+        const { key } = data.val();
+        chatStore.onFirebaseRoomDeletion(key);
     });
 
     onChildChanged(messagesRef, (data) => {

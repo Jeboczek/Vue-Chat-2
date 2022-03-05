@@ -31,6 +31,7 @@ import MessageSender from "@/components/ChatComponents/Chat/MessageSender.vue";
 import Spinner from "@/components/Spinner.vue";
 import type { Store } from "pinia";
 import { useChatStore } from "@/stores/chat";
+import Toast from "@/lib/swal-mixins/swal-toast";
 
 export default defineComponent({
     components: {
@@ -76,6 +77,18 @@ export default defineComponent({
     },
     mounted() {
         this.updateShowNav();
+        this.chatStore.$onAction((actionParams) => {
+            const { name, after } = actionParams;
+            after((r) => {
+                if (name === "onFirebaseRoomDeletion") {
+                    Toast.fire({
+                        title: "The room has just been removed.",
+                        icon: "error",
+                    });
+                    this.$router.replace("/");
+                }
+            });
+        });
     },
 });
 </script>
