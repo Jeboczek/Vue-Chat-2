@@ -51,6 +51,15 @@ export const useChatStore = defineStore({
 
             this.updateLastMessage(message);
         },
+        messageExists(key: string): boolean {
+            const keysInStore = this.messages?.map((message) => message.key);
+            return !!keysInStore?.includes(key);
+        },
+        addMessage(message: Message) {
+            if (!this.messageExists(message.key)) {
+                this.messages?.push(message);
+            }
+        },
     },
     getters: {
         isMyRoom(): boolean {
@@ -67,8 +76,9 @@ export function attachFirebaseToChatStorage() {
     const messagesRef = ref(db, `room/${chatStore.selectedRoom?.key}/message`);
 
     onChildAdded(messagesRef, (data) => {
-        const { content, username, key, date } = data.val();
-        chatStore.messages!.push({
+        const key = data.key!;
+        const { content, username, date } = data.val();
+        chatStore.addMessage({
             key: key,
             username: username,
             content: content,

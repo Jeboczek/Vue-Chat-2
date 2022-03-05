@@ -15,6 +15,7 @@
                         :key="message.key",
                         :message="message"
                     )
+                span.messages__bottom
             MessageSender.message-sender
 </template>
 
@@ -50,6 +51,10 @@ export default defineComponent({
             this.showNav = !isInResponsiveMode();
             return this.showNav;
         },
+        scrollToBottom() {
+            const messages = document.querySelector("span.messages__bottom")!;
+            messages.scrollIntoView({ behavior: "smooth" });
+        },
     },
     data(): {
         chatStore: Store;
@@ -65,6 +70,9 @@ export default defineComponent({
         loading() {
             return this.chatStore.messages === undefined;
         },
+    },
+    updated() {
+        this.scrollToBottom();
     },
     mounted() {
         this.updateShowNav();
