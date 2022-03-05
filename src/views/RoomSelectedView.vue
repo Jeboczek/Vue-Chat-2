@@ -1,7 +1,9 @@
 <template lang="pug">
-.container-fluid
+.container-fluid(v-resize="updateShowNav")
     .row
-        .col-12.col-md-5.col-lg-3.border-end.vh-100.d-flex.flex-column
+        .col-12.col-md-5.col-lg-3.border-end.vh-100.d-flex.flex-column(
+            v-if="showNav"
+        )
             ChatRoomNav
         .col-12.col-md-7.col-lg-9.d-flex.vh-100.flex-column.align-items-center.px-0
             ChatHeading
@@ -17,6 +19,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+
+import isInResponsiveMode from "@/lib/isInResponsiveMode/isInResponsiveMode";
 
 import ChatRoomNav from "@/components/ChatComponents/Nav/ChatRoomNav.vue";
 import ChatHeading from "@/components/ChatComponents/Chat/ChatHeading.vue";
@@ -38,18 +42,29 @@ export default defineComponent({
             required: true,
         },
     },
+    methods: {
+        updateShowNav(): boolean {
+            this.showNav = !isInResponsiveMode();
+            return this.showNav;
+        },
+    },
     data(): {
         chatStore: Store;
+        showNav: boolean;
     } {
         let chatStore = useChatStore();
         return {
             chatStore: chatStore,
+            showNav: false,
         };
     },
     computed: {
         loading() {
             return this.chatStore.messages === undefined;
         },
+    },
+    mounted() {
+        this.updateShowNav();
     },
 });
 </script>

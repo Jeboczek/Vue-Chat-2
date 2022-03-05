@@ -1,6 +1,8 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 
+import VueResizeObserver from "vue-resize-observer";
+
 import "sweetalert2/dist/sweetalert2.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
@@ -34,6 +36,7 @@ import { attachFirebaseToChatRoomStorage } from "@/stores/chatRoom";
     const app = createApp(App);
 
     app.use(createPinia());
+    app.use(VueResizeObserver);
     const { bindUser } = useUserStore();
     await bindUser();
 
