@@ -1,6 +1,7 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 
+// @ts-ignore
 import VueResizeObserver from "vue-resize-observer";
 
 import "sweetalert2/dist/sweetalert2.css";

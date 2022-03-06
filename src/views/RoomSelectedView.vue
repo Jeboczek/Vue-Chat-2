@@ -29,7 +29,6 @@ import ChatHeading from "@/components/ChatComponents/Chat/ChatHeading.vue";
 import Message from "@/components/ChatComponents/Chat/Message.vue";
 import MessageSender from "@/components/ChatComponents/Chat/MessageSender.vue";
 import Spinner from "@/components/Spinner.vue";
-import type { Store } from "pinia";
 import { useChatStore } from "@/stores/chat";
 import Toast from "@/lib/swal-mixins/swal-toast";
 
@@ -58,12 +57,12 @@ export default defineComponent({
         },
     },
     data(): {
-        chatStore: Store;
+        chatStore: ReturnType<typeof useChatStore>;
         showNav: boolean;
     } {
         let chatStore = useChatStore();
         return {
-            chatStore: chatStore,
+            chatStore,
             showNav: false,
         };
     },

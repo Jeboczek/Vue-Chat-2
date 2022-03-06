@@ -13,13 +13,13 @@
 
 <script lang="ts">
 import { useChatStore } from "@/stores/chat";
-import type { Store } from "pinia";
+
 import { defineComponent } from "vue";
 
 export default defineComponent({
     data(): {
         messageContent: string;
-        chatStore: Store;
+        chatStore: ReturnType<typeof useChatStore>;
     } {
         return {
             messageContent: "",

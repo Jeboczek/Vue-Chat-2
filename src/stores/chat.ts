@@ -74,6 +74,9 @@ export const useChatStore = defineStore({
             let userStore = useUserStore();
             return this.selectedRoom?.createdBy === userStore.user?.uid;
         },
+        getSelectedRoom(): ChatRoomInfo {
+            return this.selectedRoom!;
+        },
     },
 });
 

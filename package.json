@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "scripts": {
         "dev": "vite --host",
-        "build": "vue-tsc --noEmit && vite build",
+        "build": "printf \"\\033[0;31mTypecheck is skipped due to a framework bug\\033[0m\n\" && vite build",
         "preview": "vite preview --port 5050",
         "typecheck": "vue-tsc --noEmit",
         "formatEverything": "prettier --write ."

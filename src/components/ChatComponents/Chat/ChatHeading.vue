@@ -1,12 +1,12 @@
 <template lang="pug">
 .chat-heading.text-align-left.w-100.py-3.px-2.d-flex.justify-content-between.border-bottom(
-    v-if="chatStore.selectedRoom !== undefined",
+    v-if="isRoomSelected",
     v-resize="updateShowBackButton"
 )
     .chat-heading__left-wrapper.d-flex.align-items-center
         BackButton.me-1(@click="onBackClick", v-if="showBackButton")
-        ChatIcon(:chatRoomInfo="chatStore.selectedRoom", :size="2.5")
-        h5.m-0.ms-3 {{ chatStore.selectedRoom.roomName }}
+        ChatIcon(:chatRoomInfo="chatStore.getSelectedRoom", :size="2.5")
+        h5.m-0.ms-3 {{ chatStore.getSelectedRoom.roomName }}
     .chat-heading__right-wrapper
         button.btn.btn-danger.me-1(
             v-if="chatStore.isMyRoom",
@@ -21,23 +21,32 @@ import { defineComponent } from "vue";
 import { useChatStore } from "@/stores/chat";
 import ChatIcon from "@/components/ChatIcon.vue";
 import BackButton from "@/components/BackButton.vue";
-import type { Store } from "pinia";
 import Toast from "@/lib/swal-mixins/swal-toast";
 import isInResponsiveMode from "@/lib/isInResponsiveMode/isInResponsiveMode";
 
 export default defineComponent({
     components: { ChatIcon, BackButton },
-    data(): { chatStore: Store; showBackButton: boolean } {
+    data(): {
+        chatStore: ReturnType<typeof useChatStore>;
+        showBackButton: boolean;
+    } {
+        const chatStore = useChatStore();
         return {
-            chatStore: useChatStore(),
+            chatStore,
             showBackButton: false,
         };
+    },
+    computed: {
+        isRoomSelected() {
+            const selectedRoom = this.$data.chatStore.getSelectedRoom;
+            return selectedRoom !== undefined;
+        },
     },
     methods: {
         async deleteRoom() {
             this.$router.replace("/");
             try {
-                await this.chatStore.deleteSelectedRoom();
+                await this.$data.chatStore.deleteSelectedRoom();
             } catch (error) {
                 Toast.fire({
                     title: "Error occured while deleting room.",
@@ -53,8 +62,8 @@ export default defineComponent({
             this.$router.push("/");
         },
         updateShowBackButton(): boolean {
-            this.showBackButton = isInResponsiveMode();
-            return this.showBackButton;
+            this.$data.showBackButton = isInResponsiveMode();
+            return this.$data.showBackButton;
         },
     },
     mounted() {

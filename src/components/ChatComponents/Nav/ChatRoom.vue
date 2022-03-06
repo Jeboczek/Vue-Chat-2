@@ -17,7 +17,6 @@ import ChatIcon from "@/components/ChatIcon.vue";
 import { useChatStore } from "@/stores/chat";
 import { useChatRoomStore } from "@/stores/chatRoom";
 import type ChatRoomInfo from "@/interfaces/chatRoomInfo";
-import type { Store } from "pinia";
 
 export default defineComponent({
     components: { ChatIcon },
@@ -27,7 +26,11 @@ export default defineComponent({
             required: true,
         },
     },
-    data(): { animated: boolean; chatRoomStore: Store; chatStore: Store } {
+    data(): {
+        animated: boolean;
+        chatRoomStore: ReturnType<typeof useChatRoomStore>;
+        chatStore: ReturnType<typeof useChatStore>;
+    } {
         return {
             animated: false,
             chatRoomStore: useChatRoomStore(),
