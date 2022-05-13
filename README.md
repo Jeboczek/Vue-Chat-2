@@ -8,7 +8,7 @@ You can log in using your e-mail and password. Authentication is handled by Fire
 
 All messages are stored in the Firebase Realtime Database.
 
-[Give it a try!](https://jeboczek.github.io/Vue-Chat-2/)
+[Give it a try!](https://pawl0wski.github.io/Vue-Chat-2/)
 
 ## Screen shots
 
